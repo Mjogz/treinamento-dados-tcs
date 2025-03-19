@@ -53,11 +53,13 @@ ORDER BY tp.total_vendas ASC;
 # Atividade 8 - Listar todos os produtos comprados por cada cliente
 SELECT 
     p.nome_produto, 
-    c.nome
+    c.nome,
+    SUM(ip.quantidade) AS Quantidade_Produtos
 FROM Pedidos pd
 INNER JOIN ItensPedido ip ON pd.id_pedido = ip.id_pedido
 INNER JOIN Produtos p ON ip.id_produto = p.id_produto
 INNER JOIN Clientes c ON pd.id_cliente = c.id_cliente
+GROUP BY p.nome_produto, c.nome  
 ORDER BY c.id_cliente;
 
 # Atividade 9 - Ranquear clientes pelo valor total gasto começando pelo rank 1 para o maior valor.
