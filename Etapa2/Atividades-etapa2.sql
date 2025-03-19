@@ -84,7 +84,14 @@ HAVING COUNT(p.id_pedido) > 1;
 
 
 # Atividade 11 - Calcular para cada cliente a quantidade de dias entre um pedido e o pedido imediatamente anterior
-em construção...
+SELECT 
+  c.nome AS Nome_Cliente, 
+  p.data_pedido AS DataPedidoAtual, 
+  LAG(p.data_pedido) OVER (PARTITION BY p.id_cliente ORDER BY p.data_pedido) AS DataPedidoAnterior,
+  IFNULL(CAST((JULIANDAY(p.data_pedido) - JULIANDAY(LAG(p.data_pedido) OVER (PARTITION BY p.id_cliente ORDER BY p.data_pedido))) AS INTEGER), 0) AS DiferencaDatas
+FROM Clientes c
+JOIN Pedidos p ON c.id_cliente = p.id_cliente
+ORDER BY c.id_cliente, p.data_pedido;
 
 # Atividade 12 - Crie uma consulta que retorne um relatório contedo as seguintes colunas (obs: use o padrão que preferir para nomear as colunas):
 em construção...
