@@ -6,10 +6,9 @@
 import pandas as pd
 
 notas = pd.read_csv('dados-notas.csv')
-
-
 print("Notas:")
 print(notas)
+
 
 def calcular_media_notas(df):
     df['Media'] = (df['nota1'] + df['nota2'] + df['nota3']) / 3
